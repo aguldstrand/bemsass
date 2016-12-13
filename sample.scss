@@ -1,0 +1,22 @@
+block header-hs {
+
+    position: absolute;
+
+    modifier sticky {
+        
+        position: fixed;
+
+    }
+
+
+    element main {
+
+        color: #fafafa;
+
+        modifier positive {
+            color: red;
+        }
+
+    }
+
+}
