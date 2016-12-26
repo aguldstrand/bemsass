@@ -38,5 +38,5 @@ export interface ParsedModifier {
 export interface ParsedModifierValue {
     type: "modifierValue",
     name: string,
-    content: (ParsedRule)[]
+    content: (ParsedRule | ParsedModifier)[]
 }

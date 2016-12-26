@@ -9,11 +9,11 @@ fs.readFile("src/styles/main.scss", 'utf8', (err, data) => {
 
     parser.feed(data)
 
-    fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err)=>{
+    fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err) => {
     })
 
-    let sass = generator.generateDocs(parser.results[0])
-    fs.writeFile("dist/main.scss", sass, (err)=>{
+    let sass = generator.root(parser.results[0])
+    fs.writeFile("dist/main.scss", JSON.stringify(sass, null, 4), (err) => {
 
     })
 

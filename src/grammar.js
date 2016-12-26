@@ -15,7 +15,7 @@ var grammar = {
         } },
     {"name": "attribute$ebnf$1", "symbols": [/./]},
     {"name": "attribute$ebnf$1", "symbols": [/./, "attribute$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
-    {"name": "attribute", "symbols": [{"literal":"@"}, "identifier", "_", {"literal":":"}, "_", "attribute$ebnf$1", {"literal":";"}], "postprocess": p => { return { type:'attribute', name: p[1], value:p[5].join("").trim() } }},
+    {"name": "attribute", "symbols": [{"literal":"@"}, "identifier", "_", {"literal":":"}, "_", "attribute$ebnf$1", {"literal":";"}], "postprocess": p => { return { type: 'attribute', name: p[1], value: p[5].join("").trim() } }},
     {"name": "block$subexpression$1$ebnf$1", "symbols": []},
     {"name": "block$subexpression$1$ebnf$1", "symbols": ["attribute", "block$subexpression$1$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
     {"name": "block$subexpression$1", "symbols": ["block$subexpression$1$ebnf$1"]},

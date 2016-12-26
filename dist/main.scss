@@ -1,68 +1,255 @@
-.root-layout {
-
-    &.root-layout {
-        background-color: teal;
+[
+    {
+        "name": "root-layout",
+        "attributes": [
+            [
+                {
+                    "type": "attribute",
+                    "name": "blubb",
+                    "value": "vv"
+                }
+            ]
+        ],
+        "rules": [
+            {
+                "name": "Background and Border Properties",
+                "rules": [
+                    {
+                        "name": "background-color",
+                        "value": "teal"
+                    }
+                ]
+            }
+        ],
+        "modifiers": [],
+        "elements": [
+            {
+                "name": "content",
+                "attributes": [
+                    [
+                        {
+                            "type": "attribute",
+                            "name": "blubb",
+                            "value": "vv"
+                        }
+                    ]
+                ],
+                "rules": [
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "margin-top",
+                                "value": "44px"
+                            },
+                            {
+                                "name": "position",
+                                "value": "relative"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            },
+            {
+                "name": "header",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "left",
+                                "value": "0"
+                            },
+                            {
+                                "name": "right",
+                                "value": "0"
+                            },
+                            {
+                                "name": "height",
+                                "value": "44px"
+                            },
+                            {
+                                "name": "top",
+                                "value": "0"
+                            },
+                            {
+                                "name": "position",
+                                "value": "fixed"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            }
+        ]
+    },
+    {
+        "name": "header",
+        "attributes": [
+            []
+        ],
+        "rules": [],
+        "modifiers": [],
+        "elements": [
+            {
+                "name": "cta-area",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "height",
+                                "value": "100%"
+                            },
+                            {
+                                "name": "float",
+                                "value": "right"
+                            },
+                            {
+                                "name": "max-width",
+                                "value": "50%"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            },
+            {
+                "name": "logotype",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "height",
+                                "value": "100%"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            }
+        ]
+    },
+    {
+        "name": "search-block",
+        "attributes": [
+            []
+        ],
+        "rules": [
+            {
+                "name": "Background and Border Properties",
+                "rules": [
+                    {
+                        "name": "background-color",
+                        "value": "teal"
+                    }
+                ]
+            }
+        ],
+        "modifiers": [],
+        "elements": [
+            {
+                "name": "input",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Background and Border Properties",
+                        "rules": [
+                            {
+                                "name": "background-color",
+                                "value": "white"
+                            },
+                            {
+                                "name": "border-radius",
+                                "value": "20px"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "margin",
+                                "value": "10px"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            }
+        ]
+    },
+    {
+        "name": "category-list-item",
+        "attributes": [
+            []
+        ],
+        "rules": [
+            {
+                "name": "Basic Box Properties",
+                "rules": [
+                    {
+                        "name": "height",
+                        "value": "44px"
+                    }
+                ]
+            }
+        ],
+        "modifiers": [],
+        "elements": [
+            {
+                "name": "icon",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "width",
+                                "value": "44px"
+                            },
+                            {
+                                "name": "height",
+                                "value": "44px"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            },
+            {
+                "name": "title",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Color Properties",
+                        "rules": [
+                            {
+                                "name": "color",
+                                "value": "black"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            }
+        ]
     }
-
-    & .root-layout__header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 44px;
-    }
-
-    & .root-layout__content {
-        position: relative;
-        margin-top: 44px;
-    }
-
-}
-
-.header {
-
-    &.header {
-    }
-
-    & .header__logotype {
-        height: 100%;
-    }
-
-    & .header__cta-area {
-        float: right;
-        height: 100%;
-        max-width: 50%;
-    }
-
-}
-
-.search-block {
-
-    &.search-block {
-        background-color: teal;
-    }
-
-    & .search-block__input {
-        margin: 10px;
-        background-color: white;
-        border-radius: 20px;
-    }
-
-}
-
-.category-list-item {
-
-    &.category-list-item {
-        height: 44px;
-    }
-
-    & .category-list-item__icon {
-        width: 44px;
-        height: 44px;
-    }
-
-    & .category-list-item__title {
-        color: black;
-    }
-
-}
+]

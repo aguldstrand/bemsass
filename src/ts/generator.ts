@@ -1,147 +1,220 @@
 import * as input from './input'
+import { getGroupName, compareProperties } from './propertyGroups'
 
-export function generateDocs(root: input.ParsedRoot) {
+function groupAndSortRules(rules: Rule[]): RuleGroup[] {
+
+    const outp: RuleGroup[] = []
+    const lookup: { [groupName: string]: RuleGroup } = {}
+
+    const rulesLen = rules.length;
+    for (let i = 0; i < rulesLen; i++) {
+        const rule = rules[i];
+
+        const groupName = getGroupName(rule.name);
+
+        let group = lookup[groupName]
+        if (group === undefined) {
+            lookup[groupName] = group = {
+                name: groupName,
+                rules: []
+            }
+            outp.push(group)
+        }
+
+        group.rules.push(rule)
+
+    }
+
+    outp.sort((a, b) => a.name.localeCompare(b.name))
+    const outpLen = outp.length;
+    for (let i = 0; i < outp.length; i++) {
+        outp[i].rules.sort((a, b) => compareProperties(a.name, b.name))
+    }
+
+    return outp;
+
 }
 
-export default class DocumentationGenerator {
- 
-    public static root(root: input.ParsedRoot) {
-        return root.content
-            .map(this.block)
-    }
+export function root(root: input.ParsedRoot) {
+    return root.content
+        .map(block)
+}
 
-    public static block(block: input.ParsedBlock) {
+export function block(block: input.ParsedBlock): Block {
 
-        let rules: input.ParsedRule[] = []
-        let modifiers: input.ParsedModifier[] = []
-        let elements: input.ParsedElement[] = []
+    let rules: Rule[] = []
+    let modifiers: Modifier[] = []
+    let elements: Element[] = []
 
-        for (let i = 0; i < block.content.length; i++) {
-            let el = block.content[i]
+    for (let i = 0; i < block.content.length; i++) {
+        let el = block.content[i]
 
-            switch (el.type) {
-                case "rule":
-                    rules.push(this.rule(el))
-                    break
+        switch (el.type) {
+            case "rule":
+                rules.push(rule(el))
+                break
 
-                case "modifier":
-                    modifiers.push(this.modifier(el))
-                    break
+            case "modifier":
+                modifiers.push(modifier(el))
+                break
 
-                case "element":
-                    elements.push(this.element(el))
-                    break
+            case "element":
+                elements.push(element(el))
+                break
 
-                default:
-                    const _: never = el;
-            }
-        }
-
-
-        return {
-            name: block.name,
-            attributes: block.attributes,
-            rules: rules,
-            modifiers: modifiers,
-            elements: elements
-        }
-
-    }
-
-    public static rule(rule: input.ParsedRule) {
-        return {
-            name: rule.name,
-            value: rule.value
+            default:
+                const _: never = el;
         }
     }
 
-    public static modifier(modifier: input.ParsedModifier) {
 
-        let rules: input.ParsedRule[] = []
-        let modifierValues: input.ParsedModifierValue[] = []
+    modifiers.sort((a, b) => a.name.localeCompare(b.name))
+    elements.sort((a, b) => a.name.localeCompare(b.name))
 
-        for (let i = 0; i < modifier.content.length; i++) {
-            let el = modifier.content[i]
+    return {
+        name: block.name,
+        attributes: block.attributes,
+        rules: groupAndSortRules(rules),
+        modifiers: modifiers,
+        elements: elements
+    }
 
-            switch (el.type) {
-                case "rule":
-                    rules.push(this.rule(el))
-                    break
+}
 
-                case "modifierValue":
-                    modifierValues.push(this.modifierValue(el))
-                    break
+export function rule(rule: input.ParsedRule): Rule {
+    return {
+        name: rule.name,
+        value: rule.value
+    }
+}
 
-                default:
-                    const _: never = el;
-            }
+export function modifier(modifier: input.ParsedModifier): Modifier {
+
+    let rules: Rule[] = []
+    let modifierValues: ModifierValue[] = []
+
+    for (let i = 0; i < modifier.content.length; i++) {
+        let el = modifier.content[i]
+
+        switch (el.type) {
+            case "rule":
+                rules.push(rule(el))
+                break
+
+            case "modifierValue":
+                modifierValues.push(modifierValue(el))
+                break
+
+            default:
+                const _: never = el;
         }
-
-
-        return {
-            name: modifier.name,
-            rules: rules,
-            modifierValues: modifierValues
-        }
-
     }
 
 
-    public static modifierValue(modifier: input.ParsedModifierValue) {
-
-        let rules: input.ParsedRule[] = []
-
-        for (let i = 0; i < modifier.content.length; i++) {
-            let el = modifier.content[i]
-
-            switch (el.type) {
-                case "rule":
-                    rules.push(this.rule(el))
-                    break
-
-                default:
-                    const _: never = el;
-            }
-        }
-
-
-        return {
-            name: modifier.name,
-            rules: rules
-        }
-
+    return {
+        name: modifier.name,
+        rules: groupAndSortRules(rules),
+        modifierValues: modifierValues
     }
 
-    public static element(element: input.ParsedElement) {
+}
 
-        let rules: input.ParsedRule[] = []
-        let modifiers: input.ParsedModifier[] = []
 
-        for (let i = 0; i < element.content.length; i++) {
-            let el = element.content[i]
+export function modifierValue(modifier: input.ParsedModifierValue): ModifierValue {
 
-            switch (el.type) {
-                case "rule":
-                    rules.push(this.rule(el))
-                    break
+    let rules: Rule[] = []
 
-                case "modifier":
-                    modifiers.push(this.modifier(el))
-                    break
+    for (let i = 0; i < modifier.content.length; i++) {
+        let el = modifier.content[i]
 
-                default:
-                    const _: never = el;
-            }
+        switch (el.type) {
+            case "rule":
+                rules.push(rule(el))
+                break
+
+            default:
+            // const _: never = el;
         }
-
-
-        return {
-            name: element.name,
-            attributes: element.attributes,
-            rules: rules,
-            modifiers: modifiers
-        }
-
     }
 
+
+    return {
+        name: modifier.name,
+        rules: groupAndSortRules(rules)
+    }
+
+}
+
+export function element(element: input.ParsedElement): Element {
+
+    let rules: Rule[] = []
+    let modifiers: Modifier[] = []
+
+    for (let i = 0; i < element.content.length; i++) {
+        let el = element.content[i]
+
+        switch (el.type) {
+            case "rule":
+                rules.push(rule(el))
+                break
+
+            case "modifier":
+                modifiers.push(modifier(el))
+                break
+
+            default:
+                const _: never = el;
+        }
+    }
+
+
+    return {
+        name: element.name,
+        attributes: element.attributes,
+        rules: groupAndSortRules(rules),
+        modifiers: modifiers
+    }
+
+}
+
+
+export interface Block {
+    name: string,
+    attributes: Attribute[],
+    rules: RuleGroup[],
+    modifiers: Modifier[],
+    elements: Element[]
+}
+
+export interface Attribute {
+    name: string,
+    value: string
+}
+
+export interface RuleGroup {
+    name: string,
+    rules: Rule[]
+}
+
+export interface Rule {
+    name: string,
+    value: string
+}
+
+export interface Modifier {
+    name: string,
+    rules: RuleGroup[],
+    modifierValues: ModifierValue[]
+}
+
+export interface ModifierValue {
+    name: string,
+    rules: RuleGroup[],
+}
+
+export interface Element {
+    name: string,
+    attributes: Attribute[],
+    rules: RuleGroup[],
+    modifiers: Modifier[]
 }
