@@ -1,5 +1,119 @@
 [
     {
+        "name": "category-list-item",
+        "attributes": [
+            []
+        ],
+        "rules": [
+            {
+                "name": "Basic Box Properties",
+                "rules": [
+                    {
+                        "name": "height",
+                        "value": "44px"
+                    }
+                ]
+            }
+        ],
+        "modifiers": [],
+        "elements": [
+            {
+                "name": "icon",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "width",
+                                "value": "44px"
+                            },
+                            {
+                                "name": "height",
+                                "value": "44px"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            },
+            {
+                "name": "title",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Color Properties",
+                        "rules": [
+                            {
+                                "name": "color",
+                                "value": "black"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            }
+        ]
+    },
+    {
+        "name": "header",
+        "attributes": [
+            []
+        ],
+        "rules": [],
+        "modifiers": [],
+        "elements": [
+            {
+                "name": "cta-area",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "height",
+                                "value": "100%"
+                            },
+                            {
+                                "name": "float",
+                                "value": "right"
+                            },
+                            {
+                                "name": "max-width",
+                                "value": "50%"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            },
+            {
+                "name": "logotype",
+                "attributes": [
+                    []
+                ],
+                "rules": [
+                    {
+                        "name": "Basic Box Properties",
+                        "rules": [
+                            {
+                                "name": "height",
+                                "value": "100%"
+                            }
+                        ]
+                    }
+                ],
+                "modifiers": []
+            }
+        ]
+    },
+    {
         "name": "root-layout",
         "attributes": [
             [
@@ -88,60 +202,6 @@
         ]
     },
     {
-        "name": "header",
-        "attributes": [
-            []
-        ],
-        "rules": [],
-        "modifiers": [],
-        "elements": [
-            {
-                "name": "cta-area",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "height",
-                                "value": "100%"
-                            },
-                            {
-                                "name": "float",
-                                "value": "right"
-                            },
-                            {
-                                "name": "max-width",
-                                "value": "50%"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            },
-            {
-                "name": "logotype",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "height",
-                                "value": "100%"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            }
-        ]
-    },
-    {
         "name": "search-block",
         "attributes": [
             []
@@ -184,66 +244,6 @@
                             {
                                 "name": "margin",
                                 "value": "10px"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            }
-        ]
-    },
-    {
-        "name": "category-list-item",
-        "attributes": [
-            []
-        ],
-        "rules": [
-            {
-                "name": "Basic Box Properties",
-                "rules": [
-                    {
-                        "name": "height",
-                        "value": "44px"
-                    }
-                ]
-            }
-        ],
-        "modifiers": [],
-        "elements": [
-            {
-                "name": "icon",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "width",
-                                "value": "44px"
-                            },
-                            {
-                                "name": "height",
-                                "value": "44px"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            },
-            {
-                "name": "title",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Color Properties",
-                        "rules": [
-                            {
-                                "name": "color",
-                                "value": "black"
                             }
                         ]
                     }

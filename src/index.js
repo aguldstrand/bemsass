@@ -1,7 +1,8 @@
 var fs = require('fs')
 var grammar = require('./grammar')
 var nearley = require('nearley')
-var generator = require('./ts/generator')
+var formatter = require('./ts/formatter')
+var sassGenerator = require('./ts/generator/sass')
 
 var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
 
@@ -9,13 +10,15 @@ fs.readFile("src/styles/main.scss", 'utf8', (err, data) => {
 
     parser.feed(data)
 
-    fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err) => {
-    })
+    fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err) => { })
 
-    let sass = generator.root(parser.results[0])
-    fs.writeFile("dist/main.scss", JSON.stringify(sass, null, 4), (err) => {
+    const ast = parser.results[0]
+    const dom = formatter.root(ast)
+    fs.writeFile("dist/main.json", JSON.stringify(dom, null, 4), (err) => { })
 
-    })
+    const sass = sassGenerator(dom)
+
+    fs.writeFile("dist/main.scss", JSON.stringify(dom, null, 4), (err) => { })
 
 })
 

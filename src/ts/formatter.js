@@ -31,7 +31,7 @@ function block(block) {
     return {
         name: block.name,
         attributes: block.attributes.sort(function (a, b) { return a.name.localeCompare(b.name); }),
-        rules: groupAndSortRules(rules),
+        ruleGroups: groupAndSortRules(rules),
         modifiers: modifiers,
         elements: elements
     };

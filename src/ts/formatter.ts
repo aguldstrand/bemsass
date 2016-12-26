@@ -1,43 +1,11 @@
 import * as input from './input'
 import { getGroupName, compareProperties } from './propertyGroups'
-
-function groupAndSortRules(rules: Rule[]): RuleGroup[] {
-
-    const outp: RuleGroup[] = []
-    const lookup: { [groupName: string]: RuleGroup } = {}
-
-    const rulesLen = rules.length;
-    for (let i = 0; i < rulesLen; i++) {
-        const rule = rules[i];
-
-        const groupName = getGroupName(rule.name);
-
-        let group = lookup[groupName]
-        if (group === undefined) {
-            lookup[groupName] = group = {
-                name: groupName,
-                rules: []
-            }
-            outp.push(group)
-        }
-
-        group.rules.push(rule)
-
-    }
-
-    outp.sort((a, b) => a.name.localeCompare(b.name))
-    const outpLen = outp.length;
-    for (let i = 0; i < outp.length; i++) {
-        outp[i].rules.sort((a, b) => compareProperties(a.name, b.name))
-    }
-
-    return outp;
-
-}
+import { Block, Attribute, RuleGroup, Rule, Modifier, ModifierValue, Element } from './dom'
 
 export function root(root: input.ParsedRoot) {
     return root.content
         .map(block)
+        .sort((a, b) => a.name.localeCompare(b.name))
 }
 
 export function block(block: input.ParsedBlock): Block {
@@ -67,14 +35,13 @@ export function block(block: input.ParsedBlock): Block {
         }
     }
 
-
     modifiers.sort((a, b) => a.name.localeCompare(b.name))
     elements.sort((a, b) => a.name.localeCompare(b.name))
 
     return {
         name: block.name,
-        attributes: block.attributes,
-        rules: groupAndSortRules(rules),
+        attributes: block.attributes.sort((a, b) => a.name.localeCompare(b.name)),
+        ruleGroups: groupAndSortRules(rules),
         modifiers: modifiers,
         elements: elements
     }
@@ -110,6 +77,7 @@ export function modifier(modifier: input.ParsedModifier): Modifier {
         }
     }
 
+    modifierValues.sort((a, b) => a.name.localeCompare(b.name))
 
     return {
         name: modifier.name,
@@ -167,54 +135,47 @@ export function element(element: input.ParsedElement): Element {
         }
     }
 
+    modifiers.sort((a, b) => a.name.localeCompare(b.name))
 
     return {
         name: element.name,
-        attributes: element.attributes,
+        attributes: element.attributes.sort((a, b) => a.name.localeCompare(b.name)),
         rules: groupAndSortRules(rules),
         modifiers: modifiers
     }
 
 }
 
+function groupAndSortRules(rules: Rule[]): RuleGroup[] {
 
-export interface Block {
-    name: string,
-    attributes: Attribute[],
-    rules: RuleGroup[],
-    modifiers: Modifier[],
-    elements: Element[]
-}
+    const outp: RuleGroup[] = []
+    const lookup: { [groupName: string]: RuleGroup } = {}
 
-export interface Attribute {
-    name: string,
-    value: string
-}
+    const rulesLen = rules.length;
+    for (let i = 0; i < rulesLen; i++) {
+        const rule = rules[i];
 
-export interface RuleGroup {
-    name: string,
-    rules: Rule[]
-}
+        const groupName = getGroupName(rule.name);
 
-export interface Rule {
-    name: string,
-    value: string
-}
+        let group = lookup[groupName]
+        if (group === undefined) {
+            lookup[groupName] = group = {
+                name: groupName,
+                rules: []
+            }
+            outp.push(group)
+        }
 
-export interface Modifier {
-    name: string,
-    rules: RuleGroup[],
-    modifierValues: ModifierValue[]
-}
+        group.rules.push(rule)
 
-export interface ModifierValue {
-    name: string,
-    rules: RuleGroup[],
-}
+    }
 
-export interface Element {
-    name: string,
-    attributes: Attribute[],
-    rules: RuleGroup[],
-    modifiers: Modifier[]
+    outp.sort((a, b) => a.name.localeCompare(b.name))
+    const outpLen = outp.length;
+    for (let i = 0; i < outp.length; i++) {
+        outp[i].rules.sort((a, b) => compareProperties(a.name, b.name))
+    }
+
+    return outp;
+
 }
