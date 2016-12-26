@@ -1,0 +1,68 @@
+.root-layout {
+
+    &.root-layout {
+        background-color: teal;
+    }
+
+    & .root-layout__header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 44px;
+    }
+
+    & .root-layout__content {
+        position: relative;
+        margin-top: 44px;
+    }
+
+}
+
+.header {
+
+    &.header {
+    }
+
+    & .header__logotype {
+        height: 100%;
+    }
+
+    & .header__cta-area {
+        float: right;
+        height: 100%;
+        max-width: 50%;
+    }
+
+}
+
+.search-block {
+
+    &.search-block {
+        background-color: teal;
+    }
+
+    & .search-block__input {
+        margin: 10px;
+        background-color: white;
+        border-radius: 20px;
+    }
+
+}
+
+.category-list-item {
+
+    &.category-list-item {
+        height: 44px;
+    }
+
+    & .category-list-item__icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    & .category-list-item__title {
+        color: black;
+    }
+
+}

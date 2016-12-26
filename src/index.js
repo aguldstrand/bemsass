@@ -1,17 +1,34 @@
 var fs = require('fs')
 var grammar = require('./grammar')
 var nearley = require('nearley')
+var generator = require('./ts/generator')
 
 var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
 
-fs.readFile("sample.scss", 'utf8', (err, data) => {
+fs.readFile("src/styles/main.scss", 'utf8', (err, data) => {
 
     parser.feed(data)
 
-    console.log(generate(parser.results[0], "", 0))
+    fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err)=>{
+    })
+
+    let sass = generator.generateDocs(parser.results[0])
+    fs.writeFile("dist/main.scss", sass, (err)=>{
+
+    })
+
 })
 
 let generators = {
+    root: {
+        order: 0,
+        handler: function rootHandler(data, prefix, indentation) {
+            return data.content.map(d => generate(d, data.name, indentation)).join("\n")
+        }
+    },
+    attribute: function attributeHandler(data, prefix, indentation) {
+        return `${indent(indentation)}// ${data.name}: ${data.value}\n`
+    },
     block: {
         order: 0,
         handler: function blockHandler(data, prefix, indentation) {
@@ -20,12 +37,12 @@ let generators = {
                 return `${generators[p.type].order}|${p.name}`
             })
 
-            return `${indent(indentation)}.${data.name} {\n` +
+            return `${indent(indentation)}.${data.name} {\n\n` +
                 `${indent(indentation + 1)}&.${data.name} {\n` +
-                `${content.filter(d => d.type === 'rule').map(d => generate(d, data.name, indentation + 2)).join("\n")}` +
+                `${content.filter(d => d.type === 'rule').map(d => generate(d, data.name, indentation + 2)).join("")}` +
                 `${indent(indentation + 1)}}\n\n` +
 
-                `${content.filter(d => d.type !== 'rule').map(d => generate(d, data.name, indentation + 1)).join("\n")}` +
+                `${content.filter(d => d.type !== 'rule').map(d => generate(d, data.name, indentation + 1)).join("")}` +
                 `${indent(indentation)}}\n`
         }
     },
@@ -44,7 +61,7 @@ let generators = {
             })
 
             return `${indent(indentation)}&.${prefix}--${data.name} {\n` +
-                `${content.map(d => generate(d, `${prefix}--${data.name}`, indentation + 1)).join("\n")}` +
+                `${content.map(d => generate(d, `${prefix}--${data.name}`, indentation + 1)).join("")}` +
                 `${indent(indentation)}}\n`
         }
     },
@@ -62,8 +79,8 @@ let generators = {
             })
 
             return `${indent(indentation)}& .${prefix}__${data.name} {\n` +
-                `${content.map(d => generate(d, `${prefix}__${data.name}`, indentation + 1)).join("\n")}` +
-                `${indent(indentation)}}\n`
+                `${content.map(d => generate(d, `${prefix}__${data.name}`, indentation + 1)).join("")}` +
+                `${indent(indentation)}}\n\n`
         }
     }
 }
@@ -77,6 +94,10 @@ function indent(indentation) {
 }
 
 function generate(data, prefix, indentation) {
+
+    if (!data.type) {
+        console.log(JSON.stringify(data, null, 2))
+    }
 
     return generators[data.type].handler(data, prefix, indentation);
 

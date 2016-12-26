@@ -1,0 +1,61 @@
+@blubb: vv;
+block root-layout {
+
+    background-color: teal;
+
+        element header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 44px;
+    }
+
+    @blubb: vv;
+    element content {
+        position: relative;
+        margin-top: 44px;
+    }
+
+}
+
+block header {
+
+    element logotype {
+        height: 100%;
+    }
+
+    element cta-area {
+        float: right;
+        height: 100%;
+        max-width: 50%;
+    }
+
+}
+
+block search-block {
+
+    background-color: teal;
+
+    element input {
+        margin: 10px;
+        background-color: white;
+        border-radius: 20px;
+    }
+
+}
+
+block category-list-item {
+
+    height: 44px;
+
+    element icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    element title {
+        color: black;
+    }
+
+}

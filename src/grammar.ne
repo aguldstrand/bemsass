@@ -1,11 +1,20 @@
+rootScope -> (block _):* {% p => {
+    return {
+       type: 'root',
+       content: p[0].map(pp => pp[0])
+    }
+} %}
 
-block -> "block" __ identifier _ "{" _ blockContent:* _ "}" {%
+attribute -> "@" identifier _ ":" _ .:+ ";" {% p => { return { type: 'attribute', name: p[1], value: p[5].join("").trim() } } %}
+
+block -> (attribute:*) _ "block" __ identifier _ "{" _ blockContent:* _ "}" {%
 
     p => {
         return {
             type:'block',
-            name:p[2],
-            content:p[6].filter(p => p)
+            name:p[4],
+            attributes: p[0],
+            content:p[8].filter(p => p)
         }
     }
 
@@ -51,13 +60,14 @@ modifierValue -> "value" __ identifier __ "{" __ cssRule:* __ "}" {%
 %}
 
 
-element -> "element" __ identifier __ "{" __ elementContent:* __ "}" {%
+element -> (attribute:*) _ "element" __ identifier __ "{" __ elementContent:* __ "}" {%
 
     p => {
         return {
             type:'element',
-            name:p[2],
-            content:p[6].filter(p => p)
+            name:p[4],
+            attributes: p[0],
+            content:p[8].filter(p => p)
         }
     }
 
