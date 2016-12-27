@@ -1,255 +1,161 @@
-[
-    {
-        "name": "category-list-item",
-        "attributes": [
-            []
-        ],
-        "rules": [
-            {
-                "name": "Basic Box Properties",
-                "rules": [
-                    {
-                        "name": "height",
-                        "value": "44px"
-                    }
-                ]
-            }
-        ],
-        "modifiers": [],
-        "elements": [
-            {
-                "name": "icon",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "width",
-                                "value": "44px"
-                            },
-                            {
-                                "name": "height",
-                                "value": "44px"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            },
-            {
-                "name": "title",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Color Properties",
-                        "rules": [
-                            {
-                                "name": "color",
-                                "value": "black"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            }
-        ]
-    },
-    {
-        "name": "header",
-        "attributes": [
-            []
-        ],
-        "rules": [],
-        "modifiers": [],
-        "elements": [
-            {
-                "name": "cta-area",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "height",
-                                "value": "100%"
-                            },
-                            {
-                                "name": "float",
-                                "value": "right"
-                            },
-                            {
-                                "name": "max-width",
-                                "value": "50%"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            },
-            {
-                "name": "logotype",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "height",
-                                "value": "100%"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            }
-        ]
-    },
-    {
-        "name": "root-layout",
-        "attributes": [
-            [
-                {
-                    "type": "attribute",
-                    "name": "blubb",
-                    "value": "vv"
-                }
-            ]
-        ],
-        "rules": [
-            {
-                "name": "Background and Border Properties",
-                "rules": [
-                    {
-                        "name": "background-color",
-                        "value": "teal"
-                    }
-                ]
-            }
-        ],
-        "modifiers": [],
-        "elements": [
-            {
-                "name": "content",
-                "attributes": [
-                    [
-                        {
-                            "type": "attribute",
-                            "name": "blubb",
-                            "value": "vv"
-                        }
-                    ]
-                ],
-                "rules": [
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "margin-top",
-                                "value": "44px"
-                            },
-                            {
-                                "name": "position",
-                                "value": "relative"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            },
-            {
-                "name": "header",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "left",
-                                "value": "0"
-                            },
-                            {
-                                "name": "right",
-                                "value": "0"
-                            },
-                            {
-                                "name": "height",
-                                "value": "44px"
-                            },
-                            {
-                                "name": "top",
-                                "value": "0"
-                            },
-                            {
-                                "name": "position",
-                                "value": "fixed"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            }
-        ]
-    },
-    {
-        "name": "search-block",
-        "attributes": [
-            []
-        ],
-        "rules": [
-            {
-                "name": "Background and Border Properties",
-                "rules": [
-                    {
-                        "name": "background-color",
-                        "value": "teal"
-                    }
-                ]
-            }
-        ],
-        "modifiers": [],
-        "elements": [
-            {
-                "name": "input",
-                "attributes": [
-                    []
-                ],
-                "rules": [
-                    {
-                        "name": "Background and Border Properties",
-                        "rules": [
-                            {
-                                "name": "background-color",
-                                "value": "white"
-                            },
-                            {
-                                "name": "border-radius",
-                                "value": "20px"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Basic Box Properties",
-                        "rules": [
-                            {
-                                "name": "margin",
-                                "value": "10px"
-                            }
-                        ]
-                    }
-                ],
-                "modifiers": []
-            }
-        ]
+/*
+ * Block: category-list-item
+ * * * * * * * * * * * * * * */
+.category-list-item {
+
+    &.category-list-item {
+
+        /* Basic Box Properties */
+        height: 44px; 
+
     }
-]
+
+    /*
+     * Element: icon
+     * * * * * * * * */
+    & .category-list-item__icon {
+
+        /* Basic Box Properties */
+        width: 44px; 
+        height: 44px; 
+
+    }
+
+    /*
+     * Element: title
+     * * * * * * * * */
+    & .category-list-item__title {
+
+        /* Color Properties */
+        color: black; 
+
+    }
+
+}
+
+/*
+ * Block: header
+ * * * * * * * * */
+.header {
+
+    /*
+     * Element: cta-area
+     * * * * * * * * * * */
+    & .header__cta-area {
+
+        /* Basic Box Properties */
+        height: 100%; 
+        float: right; 
+        max-width: 50%; 
+
+    }
+
+    /*
+     * Element: logotype
+     * * * * * * * * * * */
+    & .header__logotype {
+
+        /* Basic Box Properties */
+        height: 100%; 
+
+    }
+
+}
+
+/*
+ * Block: root-layout
+ * * * * * * * * * * */
+.root-layout {
+
+    &.root-layout {
+
+        /* Background and Border Properties */
+        background-color: teal; 
+
+    }
+
+    /*
+     * Element: content
+     * * * * * * * * * */
+    & .root-layout__content {
+
+        /* Basic Box Properties */
+        margin-top: 44px; 
+        position: relative; 
+
+    }
+
+    /*
+     * Element: header
+     * * * * * * * * * */
+    & .root-layout__header {
+
+        /* Basic Box Properties */
+        left: 0; 
+        right: 0; 
+        height: 44px; 
+        top: 0; 
+        position: fixed; 
+
+        /*
+         * Modifier: dark
+         * * * * * * * * */
+        &.root-layout__header--dark {
+
+            /* Background and Border Properties */
+            background-color: #444; 
+
+        }
+
+        /*
+         * Modifier: red
+         * * * * * * * * */
+        &.root-layout__header--red {
+
+            /* Background and Border Properties */
+            background-color: #aa4444; 
+
+        }
+
+    }
+
+    /*
+     * Modifier: dark
+     * * * * * * * * */
+    &.root-layout--dark {
+
+        /* Background and Border Properties */
+        background-color: #444; 
+
+    }
+
+}
+
+/*
+ * Block: search-block
+ * * * * * * * * * * * */
+.search-block {
+
+    &.search-block {
+
+        /* Background and Border Properties */
+        background-color: teal; 
+
+    }
+
+    /*
+     * Element: input
+     * * * * * * * * */
+    & .search-block__input {
+
+        /* Background and Border Properties */
+        background-color: white; 
+        border-radius: 20px; 
+
+        /* Basic Box Properties */
+        margin: 10px; 
+
+    }
+
+}
+

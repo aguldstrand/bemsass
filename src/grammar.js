@@ -95,7 +95,7 @@ var grammar = {
     {"name": "identifier", "symbols": ["identifier$ebnf$1"], "postprocess": p => { return p[0].join("") }},
     {"name": "cssRule$ebnf$1", "symbols": [/./]},
     {"name": "cssRule$ebnf$1", "symbols": [/./, "cssRule$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
-    {"name": "cssRule", "symbols": ["identifier", "_", {"literal":":"}, "_", "cssRule$ebnf$1", {"literal":";"}], "postprocess": p => { return { type:'rule', name: p[0], value:p[4].join("").trim() } }},
+    {"name": "cssRule", "symbols": ["identifier", "_", {"literal":":"}, "_", "cssRule$ebnf$1", {"literal":";"}], "postprocess": p => { return { type:'rule', name: p[0], value:p[4].join("").trim() + ';' } }},
     {"name": "_$ebnf$1", "symbols": []},
     {"name": "_$ebnf$1", "symbols": ["wschar", "_$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
     {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function(d) {return null;}},

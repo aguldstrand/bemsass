@@ -81,7 +81,7 @@ elementContent ->
 
 identifier -> [a-za-z0-9-]:+ {% p => { return p[0].join("") } %}
 
-cssRule -> identifier _ ":" _ .:+ ";" {% p => { return { type:'rule', name: p[0], value:p[4].join("").trim() } } %}
+cssRule -> identifier _ ":" _ .:+ ";" {% p => { return { type:'rule', name: p[0], value:p[4].join("").trim() + ';' } } %}
 
 _  -> wschar:* {% function(d) {return null;} %}
 __ -> wschar:+ {% function(d) {return null;} %}

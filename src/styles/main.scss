@@ -3,12 +3,24 @@ block root-layout {
 
     background-color: teal;
 
-        element header {
+    modifier dark {
+        background-color: #444;
+    }
+
+    element header {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         height: 44px;
+
+        modifier dark {
+            background-color: #444;
+        }
+
+        modifier red {
+            background-color: #aa4444;
+        }
     }
 
     @blubb: vv;

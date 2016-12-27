@@ -17,7 +17,18 @@
                 {
                     "type": "rule",
                     "name": "background-color",
-                    "value": "teal"
+                    "value": "teal;"
+                },
+                {
+                    "type": "modifier",
+                    "name": "dark",
+                    "content": [
+                        {
+                            "type": "rule",
+                            "name": "background-color",
+                            "value": "#444;"
+                        }
+                    ]
                 },
                 {
                     "type": "element",
@@ -29,27 +40,49 @@
                         {
                             "type": "rule",
                             "name": "position",
-                            "value": "fixed"
+                            "value": "fixed;"
                         },
                         {
                             "type": "rule",
                             "name": "top",
-                            "value": "0"
+                            "value": "0;"
                         },
                         {
                             "type": "rule",
                             "name": "left",
-                            "value": "0"
+                            "value": "0;"
                         },
                         {
                             "type": "rule",
                             "name": "right",
-                            "value": "0"
+                            "value": "0;"
                         },
                         {
                             "type": "rule",
                             "name": "height",
-                            "value": "44px"
+                            "value": "44px;"
+                        },
+                        {
+                            "type": "modifier",
+                            "name": "dark",
+                            "content": [
+                                {
+                                    "type": "rule",
+                                    "name": "background-color",
+                                    "value": "#444;"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "modifier",
+                            "name": "red",
+                            "content": [
+                                {
+                                    "type": "rule",
+                                    "name": "background-color",
+                                    "value": "#aa4444;"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -69,12 +102,12 @@
                         {
                             "type": "rule",
                             "name": "position",
-                            "value": "relative"
+                            "value": "relative;"
                         },
                         {
                             "type": "rule",
                             "name": "margin-top",
-                            "value": "44px"
+                            "value": "44px;"
                         }
                     ]
                 }
@@ -97,7 +130,7 @@
                         {
                             "type": "rule",
                             "name": "height",
-                            "value": "100%"
+                            "value": "100%;"
                         }
                     ]
                 },
@@ -111,17 +144,17 @@
                         {
                             "type": "rule",
                             "name": "float",
-                            "value": "right"
+                            "value": "right;"
                         },
                         {
                             "type": "rule",
                             "name": "height",
-                            "value": "100%"
+                            "value": "100%;"
                         },
                         {
                             "type": "rule",
                             "name": "max-width",
-                            "value": "50%"
+                            "value": "50%;"
                         }
                     ]
                 }
@@ -137,7 +170,7 @@
                 {
                     "type": "rule",
                     "name": "background-color",
-                    "value": "teal"
+                    "value": "teal;"
                 },
                 {
                     "type": "element",
@@ -149,17 +182,17 @@
                         {
                             "type": "rule",
                             "name": "margin",
-                            "value": "10px"
+                            "value": "10px;"
                         },
                         {
                             "type": "rule",
                             "name": "background-color",
-                            "value": "white"
+                            "value": "white;"
                         },
                         {
                             "type": "rule",
                             "name": "border-radius",
-                            "value": "20px"
+                            "value": "20px;"
                         }
                     ]
                 }
@@ -175,7 +208,7 @@
                 {
                     "type": "rule",
                     "name": "height",
-                    "value": "44px"
+                    "value": "44px;"
                 },
                 {
                     "type": "element",
@@ -187,12 +220,12 @@
                         {
                             "type": "rule",
                             "name": "width",
-                            "value": "44px"
+                            "value": "44px;"
                         },
                         {
                             "type": "rule",
                             "name": "height",
-                            "value": "44px"
+                            "value": "44px;"
                         }
                     ]
                 },
@@ -206,7 +239,7 @@
                         {
                             "type": "rule",
                             "name": "color",
-                            "value": "black"
+                            "value": "black;"
                         }
                     ]
                 }
