@@ -1,3 +1,7 @@
+src/ts/**/*.js
+
+
+
 # Logs
 logs
 *.log
