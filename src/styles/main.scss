@@ -14,6 +14,8 @@ block root-layout {
         right: 0;
         height: 44px;
 
+        transform: translate(0,0);
+
         modifier dark {
             background-color: #444;
         }

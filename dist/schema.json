@@ -63,6 +63,11 @@
                             "value": "44px;"
                         },
                         {
+                            "type": "rule",
+                            "name": "transform",
+                            "value": "translate(0,0);"
+                        },
+                        {
                             "type": "modifier",
                             "name": "dark",
                             "content": [

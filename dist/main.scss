@@ -1,158 +1,161 @@
-/*
- * Block: category-list-item
- * * * * * * * * * * * * * * */
+//
+// Block: category-list-item
+//
 .category-list-item {
 
     &.category-list-item {
 
-        /* Basic Box Properties */
+        // Basic Box Properties
         height: 44px; 
 
     }
 
-    /*
-     * Element: icon
-     * * * * * * * * */
-    & .category-list-item__icon {
+    //
+    // Element: icon
+    //
+    & &__icon {
 
-        /* Basic Box Properties */
+        // Basic Box Properties
         width: 44px; 
         height: 44px; 
 
     }
 
-    /*
-     * Element: title
-     * * * * * * * * */
-    & .category-list-item__title {
+    //
+    // Element: title
+    //
+    & &__title {
 
-        /* Color Properties */
+        // Color Properties
         color: black; 
 
     }
 
 }
 
-/*
- * Block: header
- * * * * * * * * */
+//
+// Block: header
+//
 .header {
 
-    /*
-     * Element: cta-area
-     * * * * * * * * * * */
-    & .header__cta-area {
+    //
+    // Element: cta-area
+    //
+    & &__cta-area {
 
-        /* Basic Box Properties */
+        // Basic Box Properties
         height: 100%; 
         float: right; 
         max-width: 50%; 
 
     }
 
-    /*
-     * Element: logotype
-     * * * * * * * * * * */
-    & .header__logotype {
+    //
+    // Element: logotype
+    //
+    & &__logotype {
 
-        /* Basic Box Properties */
+        // Basic Box Properties
         height: 100%; 
 
     }
 
 }
 
-/*
- * Block: root-layout
- * * * * * * * * * * */
+//
+// Block: root-layout
+//
 .root-layout {
 
     &.root-layout {
 
-        /* Background and Border Properties */
+        // Background and Border Properties
         background-color: teal; 
 
     }
 
-    /*
-     * Element: content
-     * * * * * * * * * */
-    & .root-layout__content {
+    //
+    // Element: content
+    //
+    & &__content {
 
-        /* Basic Box Properties */
+        // Basic Box Properties
         margin-top: 44px; 
         position: relative; 
 
     }
 
-    /*
-     * Element: header
-     * * * * * * * * * */
-    & .root-layout__header {
+    //
+    // Element: header
+    //
+    & &__header {
 
-        /* Basic Box Properties */
+        // Basic Box Properties
         left: 0; 
         right: 0; 
         height: 44px; 
         top: 0; 
         position: fixed; 
 
-        /*
-         * Modifier: dark
-         * * * * * * * * */
+        // Transform Properties
+        transform: translate(0,0); 
+
+        //
+        // Modifier: dark
+        //
         &.root-layout__header--dark {
 
-            /* Background and Border Properties */
+            // Background and Border Properties
             background-color: #444; 
 
         }
 
-        /*
-         * Modifier: red
-         * * * * * * * * */
+        //
+        // Modifier: red
+        //
         &.root-layout__header--red {
 
-            /* Background and Border Properties */
+            // Background and Border Properties
             background-color: #aa4444; 
 
         }
 
     }
 
-    /*
-     * Modifier: dark
-     * * * * * * * * */
+    //
+    // Modifier: dark
+    //
     &.root-layout--dark {
 
-        /* Background and Border Properties */
+        // Background and Border Properties
         background-color: #444; 
 
     }
 
 }
 
-/*
- * Block: search-block
- * * * * * * * * * * * */
+//
+// Block: search-block
+//
 .search-block {
 
     &.search-block {
 
-        /* Background and Border Properties */
+        // Background and Border Properties
         background-color: teal; 
 
     }
 
-    /*
-     * Element: input
-     * * * * * * * * */
-    & .search-block__input {
+    //
+    // Element: input
+    //
+    & &__input {
 
-        /* Background and Border Properties */
+        // Background and Border Properties
         background-color: white; 
         border-radius: 20px; 
 
-        /* Basic Box Properties */
+        // Basic Box Properties
         margin: 10px; 
 
     }

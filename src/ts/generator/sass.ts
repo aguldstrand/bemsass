@@ -36,7 +36,7 @@ export function generateSass(blocks: Block[]) {
 
             // Open element
             outp += comment(`Element: ${element.name}`, ind)
-            outp += `${indent(ind)}& .${block.name}__${element.name} {\n\n`
+            outp += `${indent(ind)}& &__${element.name} {\n\n`
             ind++
 
             outp += rules(element.rules, ind)
@@ -98,7 +98,7 @@ function rules(ruleGroups: RuleGroup[], ind: number) {
     for (var i = 0; i < ruleGroupsLen; i++) {
         const ruleGroup = ruleGroups[i]
 
-        outp += `${indent(ind)}/* ${ruleGroup.name} */\n`
+        outp += `${indent(ind)}// ${ruleGroup.name}\n`
 
         const rules = ruleGroup.rules
         const rulesLen = rules.length
@@ -118,9 +118,9 @@ function comment(comment: string, ind: number) {
 
     let outp = ''
 
-    outp = `${indent(ind)}/*\n`
-    outp += `${indent(ind)} * ${comment}\n`
-    outp += `${indent(ind)} *${new Array(Math.ceil(comment.length / 2) + 2).join(' *')}/\n`
+    outp = `${indent(ind)}//\n`
+    outp += `${indent(ind)}// ${comment}\n`
+    outp += `${indent(ind)}//\n`
 
     return outp
 

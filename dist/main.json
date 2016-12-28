@@ -211,6 +211,15 @@
                                 "value": "fixed;"
                             }
                         ]
+                    },
+                    {
+                        "name": "Transform Properties",
+                        "rules": [
+                            {
+                                "name": "transform",
+                                "value": "translate(0,0);"
+                            }
+                        ]
                     }
                 ],
                 "modifiers": [
