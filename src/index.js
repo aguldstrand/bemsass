@@ -55,6 +55,8 @@ module.exports = function bemsass() {
             contents: new Buffer(sassResult.css)
         }))
 
+        next()
+
     })
 
 }
