@@ -17,9 +17,8 @@ module.exports = function bemsass() {
     return through2.obj(function (file, enc, next) {
 
         const bemsass = file.contents.toString('utf8')
-        const base = path.join(file.base, '..')
-
-        const filename = path.basename(file.path, path.extname(file.path))
+        const base = path.resolve(file.base) + '/'
+        const filename = path.dirname(file.path).substr(base.length) + '/' + path.basename(file.path, path.extname(file.path))
 
         parser.feed(file.contents.toString('utf8'))
         // fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err) => { })
