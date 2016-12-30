@@ -13,6 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "nearley": "~2.7.10",
-    "node-sass": "~4.1.1"
+    "node-sass": "~4.1.1",
+    "through2": "~2.0.3",
+    "vinyl": "~2.0.1"
   }
 }
