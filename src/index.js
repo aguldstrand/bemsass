@@ -19,29 +19,32 @@ module.exports = function bemsass() {
         const bemsass = file.contents.toString('utf8')
         const base = path.join(file.base, '..')
 
-        parser.feed(file.contents.toString('utf8'))
+        const filename = path.basename(file.path, path.extname(file.path))
 
-        fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err) => { })
+        parser.feed(file.contents.toString('utf8'))
+        // fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err) => { })
 
         const ast = parser.results[0]
         const dom = formatter.root(ast)
+        /*
         this.push(new File({
             base: base,
             path: path.join(base, 'main.json'),
             contents: new Buffer(JSON.stringify(dom, null, 4))
         }))
+        */
 
         const sass = generateSass(dom)
         this.push(new File({
             base: base,
-            path: path.join(base, 'main.scss'),
+            path: path.join(base, filename + '.scss'),
             contents: new Buffer(sass)
         }))
 
         const markdown = generateMarkdown(dom)
         this.push(new File({
             base: base,
-            path: path.join(base, 'main.md'),
+            path: path.join(base, filename + '.md'),
             contents: new Buffer(markdown)
         }))
 
@@ -51,7 +54,7 @@ module.exports = function bemsass() {
 
         this.push(new File({
             base: base,
-            path: path.join(base, 'main.css'),
+            path: path.join(base, filename + '.css'),
             contents: new Buffer(sassResult.css)
         }))
 
