@@ -19,7 +19,7 @@ module.exports = function bemsass() {
         const bemsass = file.contents.toString('utf8')
         const base = path.join(file.base, '..')
 
-        parser.feed(data)
+        parser.feed(file.contents.toString('utf8'))
 
         fs.writeFile("dist/schema.json", JSON.stringify(parser.results[0], null, 4), (err) => { })
 
