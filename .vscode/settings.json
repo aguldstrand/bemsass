@@ -5,6 +5,7 @@
         "**/.svn": true,
         "**/.hg": true,
         "**/.DS_Store": true,
-        "src/ts/**/*.js": true
+        "src/ts/**/*.js": true,
+        "node_modules": true
     }
 }
