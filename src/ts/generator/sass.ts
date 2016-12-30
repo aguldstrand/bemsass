@@ -36,7 +36,7 @@ export function generateSass(blocks: Block[]) {
 
             // Open element
             outp += comment(`Element: ${element.name}`, ind)
-            outp += `${indent(ind)}& &__${element.name} {\n\n`
+            outp += `${indent(ind)}& > &__${element.name} {\n\n`
             ind++
 
             outp += rules(element.rules, ind)

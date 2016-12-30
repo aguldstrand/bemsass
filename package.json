@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nearley": "2.7.10"
+    "nearley": "~2.7.10",
+    "node-sass": "~4.1.1"
   }
 }

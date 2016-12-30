@@ -1,9 +1,10 @@
+var { generateMarkdown } = require('./ts/generator/markdown')
+var { generateSass } = require('./ts/generator/sass')
+var formatter = require('./ts/formatter')
 var fs = require('fs')
 var grammar = require('./grammar')
 var nearley = require('nearley')
-var formatter = require('./ts/formatter')
-var { generateSass } = require('./ts/generator/sass')
-var { generateMarkdown } = require('./ts/generator/markdown')
+var nodeSass = require('node-sass');
 
 var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
 
@@ -22,5 +23,12 @@ fs.readFile("src/styles/main.scss", 'utf8', (err, data) => {
 
     const markdown = generateMarkdown(dom)
     fs.writeFile("dist/main.md", markdown, (err) => { })
+
+    nodeSass.render({
+        data: sass
+    }, function (err, result) {
+        fs.writeFile("dist/main.css", result.css, (err) => { })
+    });
+
 
 })

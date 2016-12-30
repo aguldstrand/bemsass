@@ -1,8 +1,17 @@
+declare const require: any
+
+import { generateSass } from './sass'
 import { Block, Attribute, RuleGroup, Rule, Modifier, ModifierValue, Element } from '../dom'
+var nodeSass = require('node-sass');
 
 export function generateMarkdown(blocks: Block[]) {
 
-    let outp = ''
+    let sass = generateSass(blocks)
+    let css = nodeSass.renderSync({
+        data: sass
+    })
+
+    let outp = `<style>.preview { position: relative; } ${css.css}</style>\n\n`
 
     let ind = 0
 
@@ -11,8 +20,27 @@ export function generateMarkdown(blocks: Block[]) {
         const block = blocks[i]
 
         // open block
-        outp += `# Block: ${block.name}\n\n`
+        outp += `# Block: ${block.name}\n`
         ind++
+
+        outp += '\n'
+        outp += `<div class="preview">\n`
+        outp += `    <div class="${block.name}">\n`
+
+        const elements = block.elements
+        const elementsLen = elements.length
+
+        for (let j = 0; j < elementsLen; j++) {
+            const element = elements[j]
+
+            // Open element
+            outp += `        <div class="${block.name}__${element.name}">\n`
+            outp += `        </div>\n`
+        }
+
+        outp += '    </div>\n'
+        outp += '</div>\n'
+        outp += '\n'
 
         if (block.ruleGroups !== undefined && block.ruleGroups.length !== 0) {
 
@@ -22,9 +50,6 @@ export function generateMarkdown(blocks: Block[]) {
         }
 
         // Elements
-        const elements = block.elements
-        const elementsLen = elements.length
-
         for (let j = 0; j < elementsLen; j++) {
             const element = elements[j]
 
