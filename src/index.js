@@ -10,11 +10,11 @@ var path = require('path')
 var through2 = require('through2')
 
 
-var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
-
 module.exports = function bemsass() {
 
     return through2.obj(function (file, enc, next) {
+
+        var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
 
         const bemsass = file.contents.toString('utf8')
         const base = path.resolve(file.base) + '/'
