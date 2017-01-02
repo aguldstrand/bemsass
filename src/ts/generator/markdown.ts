@@ -34,7 +34,7 @@ export function generateMarkdown(blocks: Block[]) {
             const element = elements[j]
 
             // Open element
-            outp += `        <div class="${block.name}__${element.name}">\n`
+            outp += `        <div class="${element.name}">\n`
             outp += `        </div>\n`
         }
 
@@ -56,9 +56,9 @@ export function generateMarkdown(blocks: Block[]) {
             // Open element
             outp += `## Element: ${element.name} \n\n`
 
-            outp += rules(`.${block.name} .${block.name}__${element.name}`, element.rules, ind)
+            outp += rules(`.${block.name} .${element.name}`, element.rules, ind)
 
-            outp += modifiers(element.modifiers, `${block.name}__${element.name}`, 3)
+            outp += modifiers(element.modifiers, `${element.name}`, 3)
 
         }
 
@@ -80,7 +80,7 @@ function modifiers(modifiers: Modifier[], namePrefix: string, ind: number) {
 
         outp += `${indent(ind, '#')} Modifier: ${modifier.name}\n\n`
 
-        outp += rules(`.${namePrefix}--${modifier.name}`, modifier.rules, ind)
+        outp += rules(`.${modifier.name}`, modifier.rules, ind)
 
     }
 

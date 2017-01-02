@@ -36,12 +36,12 @@ export function generateSass(blocks: Block[]) {
 
             // Open element
             outp += comment(`Element: ${element.name}`, ind)
-            outp += `${indent(ind)}& > &__${element.name} {\n\n`
+            outp += `${indent(ind)}& > ${element.name} {\n\n`
             ind++
 
             outp += rules(element.rules, ind)
 
-            outp += modifiers(element.modifiers, `${block.name}__${element.name}`, ind)
+            outp += modifiers(element.modifiers, `${element.name}`, ind)
 
             // Close element
             ind--
@@ -77,7 +77,7 @@ function modifiers(modifiers: Modifier[], namePrefix: string, ind: number) {
         const modifier = modifiers[i]
 
         outp += comment(`Modifier: ${modifier.name}`, ind)
-        outp += `${indent(ind)}&.${namePrefix}--${modifier.name} {\n\n`
+        outp += `${indent(ind)}&.${modifier.name} {\n\n`
         ind++
 
         outp += rules(modifier.rules, ind)

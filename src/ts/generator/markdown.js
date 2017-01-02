@@ -22,7 +22,7 @@ function generateMarkdown(blocks) {
         for (var j = 0; j < elementsLen; j++) {
             var element = elements[j];
             // Open element
-            outp += "        <div class=\"" + block.name + "__" + element.name + "\">\n";
+            outp += "        <div class=\"" + element.name + "\">\n";
             outp += "        </div>\n";
         }
         outp += '    </div>\n';
@@ -37,8 +37,8 @@ function generateMarkdown(blocks) {
             var element = elements[j];
             // Open element
             outp += "## Element: " + element.name + " \n\n";
-            outp += rules("." + block.name + " ." + block.name + "__" + element.name, element.rules, ind);
-            outp += modifiers(element.modifiers, block.name + "__" + element.name, 3);
+            outp += rules("." + block.name + " ." + element.name, element.rules, ind);
+            outp += modifiers(element.modifiers, "" + element.name, 3);
         }
         outp += modifiers(block.modifiers, block.name, 2);
     }
@@ -51,7 +51,7 @@ function modifiers(modifiers, namePrefix, ind) {
     for (var i = 0; i < modifiersLen; i++) {
         var modifier = modifiers[i];
         outp += indent(ind, '#') + " Modifier: " + modifier.name + "\n\n";
-        outp += rules("." + namePrefix + "--" + modifier.name, modifier.rules, ind);
+        outp += rules("." + modifier.name, modifier.rules, ind);
     }
     return outp;
 }

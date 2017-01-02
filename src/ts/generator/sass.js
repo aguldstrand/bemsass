@@ -26,10 +26,10 @@ function generateSass(blocks) {
             var element = elements[j];
             // Open element
             outp += comment("Element: " + element.name, ind);
-            outp += indent(ind) + "& > &__" + element.name + " {\n\n";
+            outp += indent(ind) + "& > " + element.name + " {\n\n";
             ind++;
             outp += rules(element.rules, ind);
-            outp += modifiers(element.modifiers, block.name + "__" + element.name, ind);
+            outp += modifiers(element.modifiers, "" + element.name, ind);
             // Close element
             ind--;
             outp += indent(ind) + "}\n\n";
@@ -51,7 +51,7 @@ function modifiers(modifiers, namePrefix, ind) {
     for (var i = 0; i < modifiersLen; i++) {
         var modifier = modifiers[i];
         outp += comment("Modifier: " + modifier.name, ind);
-        outp += indent(ind) + "&." + namePrefix + "--" + modifier.name + " {\n\n";
+        outp += indent(ind) + "&." + modifier.name + " {\n\n";
         ind++;
         outp += rules(modifier.rules, ind);
         ind--;
