@@ -1,13 +1,18 @@
 "use strict";
+exports.__esModule = true;
 var sass_1 = require("./sass");
-var nodeSass = require('node-sass');
-function generateMarkdown(blocks) {
-    var sass = sass_1.generateSass(blocks);
-    var css = nodeSass.renderSync({
+// var nodeSass = require('node-sass');
+function generateMarkdown(root) {
+    var sass = sass_1.generateSass(root);
+    /*
+    let css = nodeSass.renderSync({
         data: sass
-    });
+    })
+    */
+    var css = { css: "" };
     var outp = "<style>.preview { position: relative; } " + css.css + "</style>\n\n";
     var ind = 0;
+    var blocks = root.blocks;
     var blocksLen = blocks.length;
     for (var i = 0; i < blocksLen; i++) {
         var block = blocks[i];
@@ -28,9 +33,9 @@ function generateMarkdown(blocks) {
         outp += '    </div>\n';
         outp += '</div>\n';
         outp += '\n';
-        if (block.ruleGroups !== undefined && block.ruleGroups.length !== 0) {
+        if (block.rules !== undefined && block.rules.length !== 0) {
             // Print block properties
-            outp += rules("." + block.name, block.ruleGroups, ind);
+            outp += rules("." + block.name, block.rules, ind);
         }
         // Elements
         for (var j = 0; j < elementsLen; j++) {

@@ -1,9 +1,27 @@
+export interface Root {
+    mediaDeclarations: MediaDeclaration[],
+    blocks: Block[]
+}
+
+export interface MediaDeclaration {
+    name: string,
+    attributes: Attribute[],
+    value: string,
+    documentOrder: number
+}
+
+export interface Media {
+    name: string,
+    rules: RuleGroup[]
+}
+
 export interface Block {
     name: string,
     attributes: Attribute[],
-    ruleGroups: RuleGroup[],
+    rules: RuleGroup[],
     modifiers: Modifier[],
-    elements: Element[]
+    elements: Element[],
+    medias: Media[]
 }
 
 export interface Attribute {
@@ -24,17 +42,20 @@ export interface Rule {
 export interface Modifier {
     name: string,
     rules: RuleGroup[],
-    modifierValues: ModifierValue[]
+    modifierValues: ModifierValue[],
+    medias: Media[]
 }
 
 export interface ModifierValue {
     name: string,
     rules: RuleGroup[],
+    medias: Media[]
 }
 
 export interface Element {
     name: string,
     attributes: Attribute[],
     rules: RuleGroup[],
-    modifiers: Modifier[]
+    modifiers: Modifier[],
+    medias: Media[]
 }

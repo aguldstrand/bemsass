@@ -1,20 +1,25 @@
 declare const require: any
 
 import { generateSass } from './sass'
-import { Block, Attribute, RuleGroup, Rule, Modifier, ModifierValue, Element } from '../dom'
-var nodeSass = require('node-sass');
+import { Root, MediaDeclaration, Block, Attribute, RuleGroup, Rule, Modifier, ModifierValue, Element } from '../dom'
+// var nodeSass = require('node-sass');
 
-export function generateMarkdown(blocks: Block[]) {
+export function generateMarkdown(root: Root) {
 
-    let sass = generateSass(blocks)
+    let sass = generateSass(root)
+    /*
     let css = nodeSass.renderSync({
         data: sass
     })
+    */
+
+    var css = { css: "" }
 
     let outp = `<style>.preview { position: relative; } ${css.css}</style>\n\n`
 
     let ind = 0
 
+    const blocks = root.blocks
     const blocksLen = blocks.length;
     for (let i = 0; i < blocksLen; i++) {
         const block = blocks[i]
@@ -42,10 +47,10 @@ export function generateMarkdown(blocks: Block[]) {
         outp += '</div>\n'
         outp += '\n'
 
-        if (block.ruleGroups !== undefined && block.ruleGroups.length !== 0) {
+        if (block.rules !== undefined && block.rules.length !== 0) {
 
             // Print block properties
-            outp += rules(`.${block.name}`, block.ruleGroups, ind)
+            outp += rules(`.${block.name}`, block.rules, ind)
 
         }
 

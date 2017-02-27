@@ -1,11 +1,65 @@
 import * as input from './input'
-import { getGroupName, compareProperties } from './propertyGroups'
-import { Block, Attribute, RuleGroup, Rule, Modifier, ModifierValue, Element } from './dom'
+
+import {
+    getGroupName,
+    compareProperties
+} from './propertyGroups'
+
+import {
+    MediaDeclaration,
+    Media,
+    Block,
+    Attribute,
+    RuleGroup,
+    Rule,
+    Modifier,
+    ModifierValue,
+    Element
+} from './dom'
 
 export function root(root: input.ParsedRoot) {
-    return root.content
-        .map(block)
-        .sort((a, b) => a.name.localeCompare(b.name))
+
+    let mediaDeclarations: MediaDeclaration[] = []
+    let blocks: Block[] = []
+
+    for (let i = 0; i < root.content.length; i++) {
+        let el = root.content[i]
+
+        switch (el.type) {
+            case 'mediaDeclaration':
+                mediaDeclarations.push(mediaDeclaration(el, i))
+                break;
+
+            case 'block':
+                blocks.push(block(el))
+                break;
+        }
+    }
+
+    blocks.sort((a, b) => a.name.localeCompare(b.name))
+
+    return {
+        mediaDeclarations: mediaDeclarations,
+        blocks: blocks
+    }
+}
+
+export function mediaDeclaration(mediaDeclaration: input.ParsedMediaDeclaration, index: number): MediaDeclaration {
+    return {
+        attributes: [],
+        name: mediaDeclaration.name,
+        value: mediaDeclaration.value,
+        documentOrder: index
+    }
+}
+
+export function media(media: input.ParsedMedia): Media {
+    var rules = media.content.map(c => rule(c))
+
+    return {
+        name: media.name,
+        rules: groupAndSortRules(rules),
+    }
 }
 
 export function block(block: input.ParsedBlock): Block {
@@ -13,22 +67,27 @@ export function block(block: input.ParsedBlock): Block {
     let rules: Rule[] = []
     let modifiers: Modifier[] = []
     let elements: Element[] = []
+    let medias: Media[] = []
 
     for (let i = 0; i < block.content.length; i++) {
         let el = block.content[i]
 
         switch (el.type) {
-            case "rule":
+            case 'rule':
                 rules.push(rule(el))
                 break
 
-            case "modifier":
+            case 'modifier':
                 modifiers.push(modifier(el))
                 break
 
-            case "element":
+            case 'element':
                 elements.push(element(el))
                 break
+
+            case 'media':
+                medias.push(media(el))
+                break;
 
             default:
                 const _: never = el;
@@ -41,9 +100,10 @@ export function block(block: input.ParsedBlock): Block {
     return {
         name: block.name,
         attributes: block.attributes.sort((a, b) => a.name.localeCompare(b.name)),
-        ruleGroups: groupAndSortRules(rules),
+        rules: groupAndSortRules(rules),
         modifiers: modifiers,
-        elements: elements
+        elements: elements,
+        medias: medias
     }
 
 }
@@ -59,18 +119,23 @@ export function modifier(modifier: input.ParsedModifier): Modifier {
 
     let rules: Rule[] = []
     let modifierValues: ModifierValue[] = []
+    let medias: Media[] = []
 
     for (let i = 0; i < modifier.content.length; i++) {
         let el = modifier.content[i]
 
         switch (el.type) {
-            case "rule":
+            case 'rule':
                 rules.push(rule(el))
                 break
 
-            case "modifierValue":
+            case 'modifierValue':
                 modifierValues.push(modifierValue(el))
                 break
+
+            case 'media':
+                medias.push(media(el))
+                break;
 
             default:
                 const _: never = el;
@@ -82,7 +147,8 @@ export function modifier(modifier: input.ParsedModifier): Modifier {
     return {
         name: modifier.name,
         rules: groupAndSortRules(rules),
-        modifierValues: modifierValues
+        modifierValues: modifierValues,
+        medias: medias
     }
 
 }
@@ -91,24 +157,30 @@ export function modifier(modifier: input.ParsedModifier): Modifier {
 export function modifierValue(modifier: input.ParsedModifierValue): ModifierValue {
 
     let rules: Rule[] = []
+    let medias: Media[] = []
 
     for (let i = 0; i < modifier.content.length; i++) {
         let el = modifier.content[i]
 
         switch (el.type) {
-            case "rule":
+            case 'rule':
                 rules.push(rule(el))
                 break
 
+            case 'media':
+                medias.push(media(el))
+                break;
+
             default:
-            // const _: never = el;
+                const _: never = el;
         }
     }
 
 
     return {
         name: modifier.name,
-        rules: groupAndSortRules(rules)
+        rules: groupAndSortRules(rules),
+        medias: medias
     }
 
 }
@@ -117,18 +189,23 @@ export function element(element: input.ParsedElement): Element {
 
     let rules: Rule[] = []
     let modifiers: Modifier[] = []
+    let medias: Media[] = []
 
     for (let i = 0; i < element.content.length; i++) {
         let el = element.content[i]
 
         switch (el.type) {
-            case "rule":
+            case 'rule':
                 rules.push(rule(el))
                 break
 
-            case "modifier":
+            case 'modifier':
                 modifiers.push(modifier(el))
                 break
+
+            case 'media':
+                medias.push(media(el))
+                break;
 
             default:
                 const _: never = el;
@@ -141,7 +218,8 @@ export function element(element: input.ParsedElement): Element {
         name: element.name,
         attributes: element.attributes.sort((a, b) => a.name.localeCompare(b.name)),
         rules: groupAndSortRules(rules),
-        modifiers: modifiers
+        modifiers: modifiers,
+        medias: medias
     }
 
 }

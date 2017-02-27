@@ -1,3 +1,9 @@
+media small     ( max-width: 768px )
+media medium    ( max-width: 1024px )
+media large     ( max-width: 1920px )
+media xlarge    ( max-width: 2560px )
+media xxlarge   ( max-width: 3840px )
+
 block header-hs {
 
     position: absolute;
@@ -5,9 +11,16 @@ block header-hs {
     modifier sticky {
         
         position: fixed;
+        margin-left: 33px;
+        font-size: 22px;
+        float: right;
+        clear: left;
+        transform: translate(0, 0, 3em);
+        transition-duration: 4s;
+        transition: transform 1s ease-in-out;
+        margin: 3em;
 
     }
-
 
     element main {
 
@@ -15,8 +28,18 @@ block header-hs {
 
         modifier positive {
             color: red;
+
+            media small {
+                color: orange;
+            }
         }
 
+        media medium {
+            color: green;
+        }
     }
 
+    media large {
+        color: blue;
+    }
 }

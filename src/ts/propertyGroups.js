@@ -1,4 +1,5 @@
 "use strict";
+exports.__esModule = true;
 var propertyPattern = /^(--[^-]+-){0,1}([^:]+)$/;
 function getGroupName(name) {
     return lookup[propertyPattern.exec(name)[2]] || 'Other properties';
@@ -7,7 +8,7 @@ exports.getGroupName = getGroupName;
 function compareProperties(a, b) {
     var aMatch = propertyPattern.exec(a);
     var bMatch = propertyPattern.exec(b);
-    var nameCmp = a[2].localeCompare(b[2]);
+    var nameCmp = aMatch[2].localeCompare(bMatch[2]);
     if (nameCmp !== 0) {
         return nameCmp;
     }

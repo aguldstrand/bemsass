@@ -9,7 +9,7 @@ export function compareProperties(a: string, b: string) {
     const aMatch = propertyPattern.exec(a)
     const bMatch = propertyPattern.exec(b)
 
-    const nameCmp = a[2].localeCompare(b[2])
+    const nameCmp = aMatch[2].localeCompare(bMatch[2])
     if (nameCmp !== 0) {
         return nameCmp
     }
